@@ -11,10 +11,14 @@ import br.com.serratec.beestock.repository.ProfileRepository;
 @Service
 public class ProfileService {
     @Autowired
-    private ProfileRepository perfilRepository;
+    private ProfileRepository profileRepository;
 
     public Profile find(Integer id){
-        Optional<Profile> perfil = perfilRepository.findById(id);
-        return perfil.get();
+        Optional<Profile> profile = profileRepository.findById(id);
+        return profile.get();
+    }
+
+    public Profile add(Profile profile){
+        return profileRepository.save(profile);
     }
 }
