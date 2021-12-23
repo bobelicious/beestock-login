@@ -20,9 +20,9 @@ import br.com.serratec.beestock.security.JwtAuthenticationFilter;
 import br.com.serratec.beestock.security.JwtAuthorizationFilter;
 import br.com.serratec.beestock.security.JwtUtil;
 
-@Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+// @Configuration
+// @EnableWebSecurity
+// @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     AppConfig appConfig;
