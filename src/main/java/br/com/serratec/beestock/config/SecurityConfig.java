@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         http.addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtUtil));
         http.addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 
-        http.authorizeHttpRequests().antMatchers("http://localhost:8080/**").permitAll().anyRequest().authenticated();
+        http.authorizeHttpRequests().antMatchers("https://bestwbee-login.herokuapp.com/**").permitAll().anyRequest().authenticated();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
