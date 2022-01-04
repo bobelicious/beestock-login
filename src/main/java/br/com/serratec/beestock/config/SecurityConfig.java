@@ -25,7 +25,7 @@ import br.com.serratec.beestock.security.JwtUtil;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer  {
+public class SecurityConfig extends WebSecurityConfigurerAdapter  {
     @Autowired
     AppConfig appConfig;
     @Autowired
@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable();
+        // http.cors().and().csrf().disable();
 
         http.addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtUtil));
         http.addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
@@ -49,20 +49,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         auth.userDetailsService(userDetailsService).passwordEncoder(appConfig.bCryptPasswordEncoder());
     }
 
-    @Bean
-	public	CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("*"));
-		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		return source;
-	}
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-        .allowedOrigins("*")
-        .allowedMethods("GET","POST","PUT","DELETE","OPTIONS","HEAD","TRACE","CONNECT");
-    }
+    // @Bean
+	// public	CorsConfigurationSource corsConfigurationSource() {
+	// 	CorsConfiguration configuration = new CorsConfiguration();
+	// 	configuration.setAllowedOrigins(Arrays.asList("*"));
+	// 	configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+	// 	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	// 	source.registerCorsConfiguration("/**", configuration);
+	// 	return source;
+	// }
 }
