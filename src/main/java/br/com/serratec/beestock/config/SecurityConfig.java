@@ -49,15 +49,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         auth.userDetailsService(userDetailsService).passwordEncoder(appConfig.bCryptPasswordEncoder());
     }
 
-    @Bean
-	public	CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000/","http://localhost:3030/"));
-		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		return source;
-	}
+    // @Bean
+	// public	CorsConfigurationSource corsConfigurationSource() {
+	// 	CorsConfiguration configuration = new CorsConfiguration();
+	// 	configuration.setAllowedOrigins(Arrays.asList("*"));
+	// 	configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+	// 	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	// 	source.registerCorsConfiguration("/**", configuration);
+	// 	return source;
+	// }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
