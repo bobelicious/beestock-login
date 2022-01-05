@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
         http.addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtUtil));
         http.addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 
-        http.authorizeHttpRequests().antMatchers("https://bestwbee-login.herokuapp.com/**").permitAll().anyRequest().authenticated().and().cors().and().csrf().disable();
+        http.authorizeHttpRequests().antMatchers("https://best2bee-login.herokuapp.com/**").permitAll().anyRequest().authenticated().and().cors().and().csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
