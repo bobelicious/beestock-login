@@ -23,7 +23,7 @@ import br.com.serratec.beestock.exceptions.NotFindException;
 import br.com.serratec.beestock.model.Photo;
 import br.com.serratec.beestock.service.PhotoService;
 import br.com.serratec.beestock.service.UserService;
-@CrossOrigin(origins = {"*"})
+// @CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/usuarios")
 public class UserController {

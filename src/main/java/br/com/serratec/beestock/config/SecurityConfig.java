@@ -33,14 +33,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
     @Autowired
     JwtUtil jwtUtil;
 
+    private static final String[] PUBLIC_MATCHERS = {"/"};
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http.cors().and().csrf().disable();
+        http.cors().and().csrf().disable();
 
         http.addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtUtil));
         http.addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 
-        http.authorizeHttpRequests().antMatchers("https://best2bee-login.herokuapp.com/**").permitAll().anyRequest().authenticated().and().cors().and().csrf().disable();
+        http.authorizeHttpRequests().antMatchers(PUBLIC_MATCHERS).permitAll();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
@@ -49,13 +51,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
         auth.userDetailsService(userDetailsService).passwordEncoder(appConfig.bCryptPasswordEncoder());
     }
 
-    // @Bean
-	// public	CorsConfigurationSource corsConfigurationSource() {
-	// 	CorsConfiguration configuration = new CorsConfiguration();
-	// 	configuration.setAllowedOrigins(Arrays.asList("*"));
-	// 	configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-	// 	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	// 	source.registerCorsConfiguration("/**", configuration);
-	// 	return source;
-	// }
+    @Bean
+	public	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
+		configuration.setAllowedOrigins(Arrays.asList("*"));
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
 }
