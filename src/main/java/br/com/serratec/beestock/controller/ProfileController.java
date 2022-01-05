@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.serratec.beestock.model.Profile;
 import br.com.serratec.beestock.service.ProfileService;
 
-// @CrossOrigin(origins = {"*"})
+@CrossOrigin(origins = {"*"})
 @RestController
 @RequestMapping("/profiles")
 public class ProfileController {
